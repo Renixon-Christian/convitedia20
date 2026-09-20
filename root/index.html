@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Um tempo juntos, café com a família e um filme ou uma série pra terminar a noite.">
+  <title>Você + eu • um dia diferente</title>
+  <!--
+  PUBLICAR NO GITHUB PAGES
+  1. Envie este index.html para a raiz de um repositório no GitHub.
+  2. Settings > Pages > Deploy from a branch > main > / (root) > Save.
+  3. Compartilhe o endereço mostrado em Pages depois da publicação.
+
+  PERSONALIZAR
+  Altere a constante CONFIG no fim deste arquivo. A data é fixa, não avança
+  quando o convite é reaberto. Data adotada: amanhã, 20/09/2026.
+  whatsapp: telefone do anfitrião com país e DDD, apenas dígitos.
+  Deixe vazio para a pessoa escolher seu contato no WhatsApp.
+  Não coloque senhas nem tokens neste arquivo público.
+
+  RESPOSTAS
+  O site prepara a mensagem, mas a pessoa precisa enviá-la no WhatsApp.
+  Consulte a resposta na sua conversa. Não há banco de dados nem painel
+  administrativo. O rascunho local NÃO equivale a uma resposta recebida.
+  O botão de copiar é uma alternativa caso o WhatsApp não abra.
+  HTML, CSS e JS autocontidos: sem instalação, dependências ou build.
+  -->
+  <style>
+    :root { color-scheme:light; --ink:#292b30; --muted:#686b73; --line:#e7e7ec; --accent:#814558; --soft:#faf3f5; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:#fff; color:var(--ink); font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+    button,input,textarea { font:inherit; }
+    a { color:inherit; }
+    :focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    .wrap { width:min(760px,calc(100% - 48px)); margin:auto; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:28px 0; border-bottom:1px solid var(--line); }
+    .brand { font-weight:600; letter-spacing:-.03em; font-size:18px; }
+    .brand span,footer span { color:var(--accent); }
+    .date { color:var(--muted); font-size:14px; }
+    .hero { padding:64px 0 44px; }
+    .eyebrow { color:var(--accent); font-size:14px; letter-spacing:.08em; margin:0 0 18px; }
+    h1 { font:400 clamp(2.5rem,6vw,3.7rem)/1.12 Georgia,serif; letter-spacing:-.045em; margin:0 0 24px; }
+    h1 em { color:var(--accent); font-weight:400; }
+    .intro { max-width:570px; font-size:18px; color:var(--muted); margin:0 0 26px; }
+    .details { padding:22px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:grid; grid-template-columns:1fr 1.3fr; gap:24px; }
+    .details dt { font-size:14px; color:var(--muted); margin-bottom:4px; }
+    .details dd { margin:0; font-weight:500; }
+    .details small { display:block; font-size:14px; color:var(--muted); margin-top:3px; }
+    .program { padding:6px 0 40px; }
+    h2 { font:400 1.9rem/1.25 Georgia,serif; letter-spacing:-.025em; margin:0 0 20px; }
+    .schedule { padding:0; margin:0; list-style:none; }
+    .schedule li { display:grid; grid-template-columns:145px 1fr; gap:26px; padding:22px 0; border-bottom:1px solid var(--line); }
+    .schedule li:last-child { border-bottom:0; padding-bottom:0; }
+    .time { color:var(--accent); font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; padding-top:2px; }
+    .time small { display:block; font-size:14px; font-weight:400; color:var(--muted); }
+    h3 { font-size:17px; font-weight:600; margin:0 0 4px; }
+    .schedule p { margin:0; color:var(--muted); }
+    .vote { background:#f8f8fa; border:1px solid var(--line); border-radius:16px; padding:32px; margin:0 0 30px; scroll-margin-top:20px; }
+    .vote h2 { margin-bottom:10px; }
+    .sub { color:var(--muted); margin:0 0 24px; }
+    fieldset { padding:0; margin:0; border:0; min-width:0; }
+    legend { font-size:14px; font-weight:600; margin-bottom:10px; }
+    .choices { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .choice { display:flex; gap:12px; align-items:center; background:white; padding:18px 16px; border:1px solid #c9c9d1; border-radius:10px; cursor:pointer; }
+    .choice:has(input:checked) { background:var(--soft); border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+    .choice input { flex-shrink:0; accent-color:var(--accent); width:18px; height:18px; margin:0; }
+    .choice strong { display:block; font-weight:500; }
+    .choice small { display:block; font-size:14px; color:var(--muted); }
+    .text-label { display:block; margin:22px 0 8px; font-size:14px; font-weight:500; }
+    .text-label span { color:var(--muted); font-weight:400; }
+    input[type=text],textarea { width:100%; min-width:0; background:white; color:var(--ink); border:1px solid #c9c9d1; border-radius:8px; padding:12px 14px; }
+    input::placeholder { color:#71747c; }
+    .actions { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin-top:24px; }
+    .cta,.secondary { min-height:48px; padding:12px 18px; cursor:pointer; border-radius:8px; font-weight:500; }
+    .cta { background:var(--accent); color:white; border:1px solid var(--accent); }
+    .cta:hover { background:#663547; }
+    .secondary { background:transparent; color:var(--muted); border:1px solid transparent; }
+    .secondary:hover { color:var(--ink); border-color:#c9c9d1; }
+    .agreement { margin-top:24px; padding:20px; border:1px solid var(--line); background:white; border-radius:10px; }
+    .agreement p { margin:8px 0 16px; color:var(--muted); }
+    .agreement label { display:flex; align-items:flex-start; gap:12px; cursor:pointer; }
+    .agreement input { flex-shrink:0; width:20px; height:20px; margin:3px 0 0; accent-color:var(--accent); }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    .cta:disabled:hover { background:var(--accent); }
+    .help { font-size:14px; color:var(--muted); margin:16px 0 0; }
+    #status { color:#355f43; margin:16px 0 0; }
+    #status:empty { display:none; }
+    #manual { margin-top:16px; }
+    #manual textarea { min-height:180px; margin-top:8px; }
+    footer { text-align:center; color:var(--muted); font-size:14px; padding:0 0 30px; }
+    @media(max-width:540px) { .wrap { width:calc(100% - 40px); } header { padding:22px 0; } .hero { padding:42px 0 32px; } .intro { font-size:17px; } .details { grid-template-columns:1fr; gap:18px; } .schedule li { grid-template-columns:105px 1fr; gap:16px; } .time { font-size:14px; } .vote { padding:24px 20px; } .choices { grid-template-columns:1fr; } .actions { align-items:stretch; flex-direction:column; } h2 { font-size:1.7rem; } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><div class="brand">você <span>+</span> eu</div><span class="date" id="date">20 SET</span></header>
+    <main>
+      <section class="hero" aria-labelledby="title">
+        <p class="eyebrow">Um convite pra você</p>
+        <h1 id="title">Vamos passar um tempo<br><em>juntinhos?</em></h1>
+        <p class="intro">Quero um dia diferente com você. A gente se encontra, toma um café com a família e depois volta pra assistir alguma coisa, bem de boa.</p>
+        <dl class="details">
+          <div><dt>Quando</dt><dd id="date-detail">Domingo, 20 de setembro de 2026.</dd><small>A partir das 16:00</small></div>
+          <div><dt>Onde</dt><dd>Casa do melhor namorado do mundo</dd><small>Sim, a minha. ♥</small></div>
+        </dl>
+      </section>
+      <section class="program" aria-labelledby="program-title">
+        <h2 id="program-title">Pensei assim...</h2>
+        <ol class="schedule">
+          <li><div class="time">16:00</div><div><h3>A gente se encontra</h3><p>Vem pra cá pra gente ficar um pouco junto antes de sair.</p></div></li>
+          <li><div class="time">17:00–18:00<small>mais ou menos</small></div><div><h3>Café com a família</h3><p>A ideia é sair pra tomar café com a família mais ou menos entre esses horários.</p></div></li>
+          <li><div class="time">19:00</div><div><h3>De volta pra casa</h3><p>A gente volta e se acomoda pra assistir a um filme ou a alguns episódios de uma série.</p></div></li>
+          <li><div class="time">Por volta das 21:00</div><div><h3>Encerramos a noite</h3><p>Pra terminar o dia com aquele gostinho de querer ficar mais um pouquinho.</p></div></li>
+        </ol>
+      </section>
+      <section class="vote" id="decisao" aria-labelledby="vote-title">
+        <h2 id="vote-title">O que você prefere assistir?</h2>
+        <p class="sub">Escolhe aqui e me conta. Se já tiver algo em mente, pode sugerir também.</p>
+        <form id="reply-form" action="https://api.whatsapp.com/send" method="get" target="_self">
+          <input type="hidden" name="phone" id="whatsapp-phone" value="5584981446914">
+          <input type="hidden" name="text" id="whatsapp-text" value="">
+          <fieldset><legend>Sua escolha</legend><div class="choices">
+            <label class="choice"><input type="radio" name="programa" value="filme" required><span><strong>Um filme</strong><small>Pra ver do começo ao fim.</small></span></label>
+            <label class="choice"><input type="radio" name="programa" value="serie" required><span><strong>Alguns episódios</strong><small>De uma série que a gente curta.</small></span></label>
+          </div></fieldset>
+          <label class="text-label" for="suggestion">Tem alguma sugestão? <span>(opcional)</span></label>
+          <input type="text" id="suggestion" maxlength="160" placeholder="Nome do filme ou da série">
+          <section class="agreement" aria-labelledby="agreement-title">
+            <h3 id="agreement-title">Um combinado pra gente aproveitar de verdade</h3>
+            <p>Durante o nosso encontro, vamos deixar o celular de lado. Só vale usar pra coisas sérias, como atender ou responder à mãe ou ao pai. Fora isso, nada de ficar nas telas — o filme ou a série que a gente vai ver junto é a nossa exceção. ♥</p>
+            <label for="agreement"><input type="checkbox" id="agreement" name="agreement" required autocomplete="off"><span>Aceito ficar sem telas durante o encontro, com essas exceções.</span></label>
+          </section>
+          <p class="help" id="gate-help">Escolha filme ou série e aceite o combinado para liberar a confirmação.</p>
+          <div class="actions"><button class="cta" type="submit" id="confirm" disabled aria-describedby="gate-help">Te contar pelo WhatsApp</button><button class="secondary" type="button" id="copy" disabled aria-describedby="gate-help">Copiar resposta</button></div>
+          <p class="help" id="send-help">Vai abrir nossa conversa no WhatsApp. Toque em enviar por lá para concluir.</p>
+          <p id="status" role="status" aria-live="polite"></p>
+          <div id="manual" hidden><label for="message">Copie a mensagem e envie na nossa conversa:</label><textarea id="message" readonly></textarea></div>
+        </form>
+        <p class="help">Se o WhatsApp não abrir, acesse este convite no Safari ou Chrome, fora da prévia do arquivo. Você também pode copiar a resposta e colar na nossa conversa.</p>
+        <noscript><p>Ative o JavaScript para escolher filme ou série, aceitar o combinado e preparar sua confirmação.</p></noscript>
+      </section>
+    </main>
+    <footer>Te espero. <span>♥</span></footer>
+  </div>
+  <script>
+    const CONFIG = {
+      data: '2026-09-20',
+      whatsapp: '5584981446914' // Opcional: país + DDD + número, somente dígitos.
+    };
+    const form = document.querySelector('#reply-form');
+    const status = document.querySelector('#status');
+    const suggestion = document.querySelector('#suggestion');
+    const agreement = document.querySelector('#agreement');
+    const confirmButton = document.querySelector('#confirm');
+    const whatsappText = document.querySelector('#whatsapp-text');
+    const copyButton = document.querySelector('#copy');
+    function updateGate() {
+      const ready = agreement.checked && ['filme', 'serie'].includes(form.elements.programa.value);
+      confirmButton.disabled = !ready;
+      copyButton.disabled = !ready;
+      whatsappText.value = ready ? message() : '';
+      document.querySelector('#gate-help').textContent = ready
+        ? 'Tudo certo! Agora você pode abrir o WhatsApp e enviar sua confirmação.'
+        : 'Escolha filme ou série e aceite o combinado para liberar a confirmação.';
+    }
+    const day = new Date(CONFIG.data + 'T12:00:00');
+    const dateFull = day.toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+    document.querySelector('#date').textContent = day.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace(' de ', ' ').replace('.', '').toUpperCase();
+    document.querySelector('#date-detail').textContent = day.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}) + '.';
+    const phone = CONFIG.whatsapp.replace(/\D/g,'');
+    document.querySelector('#whatsapp-phone').value = phone;
+    if (phone) document.querySelector('#send-help').textContent = 'Vai abrir nossa conversa no WhatsApp com a mensagem pronta. É só tocar em enviar.';
+    const draftKey = 'convite-rascunho-' + CONFIG.data;
+    function saveDraft() {
+      try { localStorage.setItem(draftKey, JSON.stringify({choice:form.elements.programa.value,title:suggestion.value})); } catch (_) {}
+    }
+    try {
+      const draft = JSON.parse(localStorage.getItem(draftKey) || 'null');
+      if (draft) {
+        if (['filme','serie'].includes(draft.choice)) form.elements.programa.value = draft.choice;
+        if (typeof draft.title === 'string') suggestion.value = draft.title.slice(0,160);
+      }
+    } catch (_) {}
+    agreement.checked = false;
+    updateGate();
+    form.addEventListener('change', updateGate);
+    form.addEventListener('input', () => { updateGate(); saveDraft(); status.textContent = ''; document.querySelector('#manual').hidden = true; });
+    function message() {
+      if (!agreement.checked || !['filme', 'serie'].includes(form.elements.programa.value)) return '';
+      const choice = form.elements.programa.value === 'filme' ? 'um filme' : 'alguns episódios de uma série';
+      return 'Combinado! ♥\nPrefiro ' + choice + '.' + (suggestion.value.trim() ? '\nSugestão: ' + suggestion.value.trim() : '') + '\nAceito ficar sem telas, tirando o que vamos assistir juntos. Celular só pra coisas sérias, como falar com mãe ou pai.';
+    }
+    form.addEventListener('submit', event => {
+      if (!form.reportValidity() || !agreement.checked || !['filme', 'serie'].includes(form.elements.programa.value)) {
+        event.preventDefault();
+        return;
+      }
+      saveDraft();
+      whatsappText.value = message();
+      status.textContent = 'Abrindo o WhatsApp. Toque em enviar por lá para concluir.';
+      // Envio nativo na mesma aba: não depende de pop-up nem clique simulado.
+    });
+    window.addEventListener('pageshow', updateGate);
+    document.querySelector('#copy').addEventListener('click', async () => {
+      if (!form.reportValidity() || !agreement.checked || !['filme', 'serie'].includes(form.elements.programa.value)) return;
+      saveDraft();
+      const text = message();
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = 'Resposta copiada! Agora cole na conversa com seu namorado e envie.';
+      } catch (_) {
+        document.querySelector('#manual').hidden = false;
+        const field = document.querySelector('#message'); field.value = text; field.focus(); field.select();
+        status.textContent = 'Selecione e copie o texto abaixo para enviar sua resposta.';
+      }
+    });
+  </script>
+</body>
+</html>
